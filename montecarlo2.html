@@ -1,6 +1,44 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <title>MontiNigro</title>
+        <link rel="stylesheet" href="montecarlo2css.css">
     </head>
+    <body>
+        <div class="container">
+            <div class="table">
+                <table id="monteCarloTable">
+                    <tr>
+                        <th>Data 1</th>
+                        <th>Data 2</th>
+                        <th>Probability</th>
+                        <th>Cumulative Probability</th>
+                        <th>RNI</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </table>
+                <button onclick="addTableRow()">Add Row</button>
+                <script>
+                    function addTableRow() {
+                        let table = document.getElementById("monteCarloTable");
+                        let newRow = table.insertRow(); // Create a new row
+            
+                        for (let i = 0; i < 5; i++) { // 5 columns
+                            let cell = newRow.insertCell(i);
+                            let input = document.createElement("input");
+                            input.type = "text";
+                            cell.appendChild(input);
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </body> 
+    
 </html>
