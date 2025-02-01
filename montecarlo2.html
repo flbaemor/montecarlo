@@ -6,8 +6,8 @@
     </head>
     <body>
         <div class="container">
-            <div class="table">
-                <table id="monteCarloTable">
+            <div class="inputTable">
+                <table class="monteCarloTable" id="monteCarloTable">
                     <tr>
                         <th>Data 1</th>
                         <th>Data 2</th>
@@ -18,25 +18,66 @@
                     <tr>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
+                        <td><input type="number" class="probability" oninput="updateCalculations()"></td>
+                        <td><input type="text" class="cumulative" readonly></td>
+                        <td><input type="text" class="rni" readonly></td>
                     </tr>
                 </table>
-                <button onclick="addTableRow()">Add Row</button>
+                <button class="button" onclick="addTableRow()">Add Row</button>
                 <script>
                     function addTableRow() {
                         let table = document.getElementById("monteCarloTable");
-                        let newRow = table.insertRow(); // Create a new row
-            
-                        for (let i = 0; i < 5; i++) { // 5 columns
+                        let newRow = table.insertRow();
+                        for (let i = 0; i < 5; i++) {
                             let cell = newRow.insertCell(i);
                             let input = document.createElement("input");
-                            input.type = "text";
+                            input.type = (i === 2) ? "number" : "text"; // Number input for probability
+                            if (i === 2) input.classList.add("probability");
+                            if (i === 3) {
+                                input.classList.add("cumulative");
+                                input.readOnly = true; // Make cumulative probability readonly
+                            }
+                            if (i === 4) {
+                                input.classList.add("rni");
+                                input.readOnly = true; // Make RNI readonly
+                            }
+                            input.oninput = (i === 2) ? updateCalculations : null; // Update when probability changes
                             cell.appendChild(input);
                         }
                     }
+            
+                    function updateCalculations() {
+                        let table = document.getElementById("monteCarloTable");
+                        let rows = table.getElementsByTagName("tr");
+                        let cumulativeSum = 0;
+                        let previousEnd = -1;
+            
+                        for (let i = 1; i < rows.length; i++) {
+                            let probabilityInput = rows[i].cells[2].querySelector("input");
+                            let cumulativeInput = rows[i].cells[3].querySelector("input");
+                            let rniInput = rows[i].cells[4].querySelector("input");
+            
+                            let probabilityValue = parseFloat(probabilityInput.value);
+            
+                            if (!isNaN(probabilityValue) && probabilityValue > 0) {
+                                cumulativeSum += probabilityValue;
+                                cumulativeInput.value = cumulativeSum.toFixed(2);
+            
+                                let startRNI = previousEnd + 1;
+                                let endRNI = Math.round(cumulativeSum * 100) - 1;
+                                rniInput.value = `${startRNI}-${endRNI}`;
+            
+                                previousEnd = endRNI;
+                            } else {
+                                cumulativeInput.value = "";
+                                rniInput.value = "";
+                            }
+                        }
+                    }
                 </script>
+            </div>
+            <div class="outputTable">
+                
             </div>
         </div>
     </body> 

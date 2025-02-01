@@ -1,10 +1,67 @@
-*{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
 }
-.table{
-    width: 50%;
-    min-height: 75vh;
-    height: 50%;
-    background-image: "C:\Users\rmnxq\Downloads\F2yu3BvWYAEeusM.jpg";
-    padding: auto;
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+}
+
+.inputTable {
+    background-color: #90d6a5;
+    height: 100vh;
+    width: 40%; 
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.monteCarloTable {
+    margin-top: 20px;
+    width: 90%; 
+    border-collapse: collapse;
+    border-radius: 5px;
+}
+
+.monteCarloTable th, .monteCarloTable td {
+    color: white;
+    background-color: none;
+    padding: 5px; 
+    text-align: center;
+}
+
+.monteCarloTable input {
+    border-radius: 5px;
+    border: none;
+    width: 90%; 
+    padding: 3px; 
+    box-sizing: border-box;
+}
+
+.button {
+    color: white;
+    background-image: linear-gradient(45deg, #df4881, #c430d7);
+    border: none;
+    margin-top: auto;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.outputTable {
+    background-image: linear-gradient(45deg, #df4881, #c430d7);
+    height: 100vh;
+    width: 60%; 
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
 }
