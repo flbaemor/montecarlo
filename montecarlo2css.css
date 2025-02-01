@@ -14,6 +14,7 @@ body {
 }
 
 .inputTable {
+    color: white;
     background-color: #90d6a5;
     height: 100vh;
     width: 40%; 
@@ -24,7 +25,6 @@ body {
 }
 
 .monteCarloTable {
-    margin-top: 20px;
     width: 90%; 
     border-collapse: collapse;
     border-radius: 5px;
